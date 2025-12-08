@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PostDetails from "./PostDetails";
+import PostErrorBoundary from "./postErrorBoundary";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -10,6 +11,18 @@ function App() {
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);
+
+  const handleRetryPost = (postId) => {
+    console.log(`Retrying post ${postId}`);
+    // Force re-render by resetting and setting selectedId
+    setSelectedId(null);
+    setTimeout(() => setSelectedId(postId), 0);
+  };
+
+  const handleDismissError = (postId) => {
+    console.log(`Dismissing error for post ${postId}`);
+    setSelectedId(null);
+  };
 
   return (
     <div style={{ padding: 20 }}>
@@ -22,7 +35,16 @@ function App() {
 
       <hr />
 
-      {selectedId && <PostDetails id={selectedId} />}
+      {selectedId && (
+        <PostErrorBoundary
+          postId={selectedId}
+          onRetry={handleRetryPost}
+          onDismiss={handleDismissError}
+          key={selectedId} //forces remount on ID change
+        >
+          <PostDetails id={selectedId} />
+        </PostErrorBoundary>
+      )}
     </div>
   );
 }
