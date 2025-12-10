@@ -11,6 +11,11 @@ class AppErrorBoundary extends React.Component {
         }
     }
 
+    //added getDerivedStateFromError to update state on error
+    static getDerivedStateFromError(error) {
+        return { hasError: true };
+    }
+
     componentDidCatch(error, errorInfo) {
         console.log('Error caught by AppErrorBoundary:', error);
         this.setState({

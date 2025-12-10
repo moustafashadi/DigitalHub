@@ -43,14 +43,15 @@ class PostErrorBoundary extends React.Component {
     };
 
     render() {
-        if(this.state.hasError){
-            <div>
-                <div><h2>failed to load post</h2></div>
-                <p>{this.state.error?.message || 'an unexpected error occurred'}</p>
-            </div>
+        if (this.state.hasError) {
+            return (
+                <div>
+                    <div><h2>failed to load post</h2></div>
+                    <p>{this.state.error?.message || 'an unexpected error occurred'}</p>
+                </div>
 
+            );
         }
-
         return this.props.children;
     }
 }
