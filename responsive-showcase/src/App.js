@@ -21,9 +21,17 @@
 
 import Navbar from './components/Navbar';
 import Card from './components/Card';
-import { cardsData } from './mockData';
+import { cardsData, productsData } from './mockData';
+import { useState } from 'react';
+import ProductsTable from './components/ProductsTable';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('home');
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab)
+  }
+
   return (
     /**
      * DECISION: Min-height screen with gray background
@@ -32,17 +40,16 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       
       {/* Navbar - Sticky positioning handled internally */}
-      <Navbar />
+      <Navbar activeTab={activeTab} onTabChange={handleTabChange}/>
 
       {/* Main Content Container */}
       {/* DECISION: Max-width with horizontal centering
        * WHY: Improves readability on ultra-wide screens
        * Consistent padding across breakpoints */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
-        {/* Page Header */}
-        {/* DECISION: Contextual heading for better SEO and accessibility
-         * Gradient text for visual appeal matching brand */}
+
+        {activeTab === 'home' && (
+        <>
         <div className="mb-8 md:mb-12">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Explore Our <span className="bg-gradient-to-r from-primary-600 to-teal-500 bg-clip-text text-transparent">Services</span>
@@ -69,6 +76,14 @@ function App() {
             <Card key={card.id} data={card} />
           ))}
         </div>
+        </>
+        )}
+
+        {/* Products Tab - Table */}
+        {activeTab === 'products' && (
+          <ProductsTable products={productsData} />
+        )}
+        
 
         {/* Footer/Spacing */}
         {/* DECISION: Bottom padding for breathing room

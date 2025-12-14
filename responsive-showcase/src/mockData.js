@@ -5,11 +5,11 @@
  */
 
 export const navigationTabs = [
-  { id: 1, label: 'Home', active: true },
-  { id: 2, label: 'Products', active: false },
-  { id: 3, label: 'Services', active: false },
-  { id: 4, label: 'About', active: false },
-  { id: 5, label: 'Contact', active: false },
+  { id: 1, label: 'Home'},
+  { id: 2, label: 'Products'},
+  { id: 3, label: 'Services'},
+  { id: 4, label: 'About'},
+  { id: 5, label: 'Contact'},
 ];
 
 export const userMenuItems = [
@@ -123,4 +123,32 @@ export const cardsData = [
       'https://images.unsplash.com/photo-1622630998477-20aa696ecb05?w=800&h=600&fit=crop',
     ],
   },
+];
+
+export const productsData = [
+  { id: 1, name: 'Wireless Headphones', category: 'Electronics', price: 79.99, offer: 15, supplier: 'TechSound Inc', stock: 45, rating: 4.5 },
+  { id: 2, name: 'Smart Watch', category: 'Electronics', price: 199.99, offer: null, supplier: 'WearTech Ltd', stock: 23, rating: 4.7 },
+  { id: 3, name: 'Yoga Mat', category: 'Fitness', price: 29.99, offer: 20, supplier: 'FitLife Co', stock: 150, rating: 4.3 },
+  { id: 4, name: 'Office Chair', category: 'Furniture', price: 249.99, offer: 10, supplier: 'Comfort Seating', stock: 12, rating: 4.6 },
+  { id: 5, name: 'LED Desk Lamp', category: 'Furniture', price: 39.99, offer: null, supplier: 'BrightHome', stock: 67, rating: 4.4 },
+  { id: 6, name: 'Protein Powder', category: 'Fitness', price: 49.99, offer: 25, supplier: 'NutriMax', stock: 89, rating: 4.8 },
+  { id: 7, name: 'Laptop Stand', category: 'Electronics', price: 34.99, offer: null, supplier: 'ErgoTech', stock: 34, rating: 4.2 },
+  { id: 8, name: 'Water Bottle', category: 'Fitness', price: 19.99, offer: 30, supplier: 'HydroFlow', stock: 200, rating: 4.1 },
+  { id: 9, name: 'Mechanical Keyboard', category: 'Electronics', price: 129.99, offer: 15, supplier: 'KeyMaster Pro', stock: 28, rating: 4.9 },
+  { id: 10, name: 'Standing Desk', category: 'Furniture', price: 399.99, offer: null, supplier: 'Comfort Seating', stock: 8, rating: 4.7 },
+  { id: 11, name: 'Resistance Bands', category: 'Fitness', price: 24.99, offer: 20, supplier: 'FitLife Co', stock: 145, rating: 4.4 },
+  { id: 12, name: 'USB-C Hub', category: 'Electronics', price: 44.99, offer: null, supplier: 'TechSound Inc', stock: 56, rating: 4.3 },
+  { id: 13, name: 'Bookshelf', category: 'Furniture', price: 159.99, offer: 10, supplier: 'BrightHome', stock: 15, rating: 4.5 },
+  { id: 14, name: 'Foam Roller', category: 'Fitness', price: 34.99, offer: null, supplier: 'NutriMax', stock: 78, rating: 4.6 },
+  { id: 15, name: 'Wireless Mouse', category: 'Electronics', price: 29.99, offer: 25, supplier: 'KeyMaster Pro', stock: 112, rating: 4.4 },
+  { id: 16, name: 'Desk Organizer', category: 'Furniture', price: 19.99, offer: 15, supplier: 'ErgoTech', stock: 94, rating: 4.2 },
+  { id: 17, name: 'Jump Rope', category: 'Fitness', price: 14.99, offer: null, supplier: 'HydroFlow', stock: 167, rating: 4.3 },
+  { id: 18, name: 'Webcam', category: 'Electronics', price: 89.99, offer: 20, supplier: 'TechSound Inc', stock: 41, rating: 4.5 },
+  { id: 19, name: 'Monitor Arm', category: 'Furniture', price: 79.99, offer: null, supplier: 'Comfort Seating', stock: 19, rating: 4.7 },
+  { id: 20, name: 'Dumbbells Set', category: 'Fitness', price: 149.99, offer: 10, supplier: 'FitLife Co', stock: 33, rating: 4.8 },
+  { id: 21, name: 'Bluetooth Speaker', category: 'Electronics', price: 59.99, offer: null, supplier: 'WearTech Ltd', stock: 87, rating: 4.6 },
+  { id: 22, name: 'Office Plant', category: 'Furniture', price: 24.99, offer: 30, supplier: 'BrightHome', stock: 125, rating: 4.1 },
+  { id: 23, name: 'Exercise Ball', category: 'Fitness', price: 39.99, offer: 15, supplier: 'NutriMax', stock: 92, rating: 4.4 },
+  { id: 24, name: 'Cable Management', category: 'Electronics', price: 12.99, offer: null, supplier: 'ErgoTech', stock: 203, rating: 4.2 },
+  { id: 25, name: 'Ergonomic Footrest', category: 'Furniture', price: 49.99, offer: 20, supplier: 'Comfort Seating', stock: 37, rating: 4.5 },
 ];
