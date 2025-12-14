@@ -1,37 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { productsData } from "../mockData";
+import { useEffect, useState } from "react";
 
-function useDebounce() {
-  const [query, setQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState(query);
+function useDebounce(value, delay = 500) {
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
+    // Set up a timer to update the debounced value after the specified delay
     const handler = setTimeout(() => {
-      setDebouncedQuery(query);
-    }, 500);
+      setDebouncedValue(value);
+    }, delay);
 
+    // Clean up the timer if the value or delay changes before the timer completes
     return () => {
       clearTimeout(handler);
     };
-  }, [query]);
+  }, [value, delay]);
 
-  useEffect(() => {
-    if (debouncedQuery) {
-      fetchResults(debouncedQuery);
-    }
-  }, [debouncedQuery]);
-
-  const fetchResults = (searchTerm, productsData) => {
-    if (!searchTerm) return productsData;
-
-    let result = productsData.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.supplier.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    return result;
-  }
+  return debouncedValue;
 }
 
 export default useDebounce;

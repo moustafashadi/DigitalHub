@@ -1,4 +1,4 @@
-import React, { use, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FiFilter, FiSearch, FiChevronUp, FiChevronDown, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import useDebounce from "../hooks/useDebounce";
 
@@ -10,6 +10,8 @@ const ProductsTable = ({ products }) => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
   const categories = useMemo(
     () => ["all", ...new Set(products.map((p) => p.category))],
@@ -23,11 +25,11 @@ const ProductsTable = ({ products }) => {
   const filteredAndSortedProducts = useMemo(() => {
     let result = [...products];
 
-    if (searchTerm) {
+    if (debouncedSearchTerm) {
       result = result.filter(
         (product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.supplier.toLowerCase().includes(searchTerm.toLowerCase())
+          product.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+          product.supplier.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
       );
     }
 
@@ -66,7 +68,7 @@ const ProductsTable = ({ products }) => {
     return result;
   }, [
     products,
-    searchTerm,
+    debouncedSearchTerm,
     categoryFilter,
     supplierFilter,
     offerFilter,
@@ -150,9 +152,7 @@ const ProductsTable = ({ products }) => {
                 id="search"
                 type="text"
                 value={searchTerm}
-                onChange={(e) =>
-                  useDebounce(setSearchTerm)(e.target.value)
-                }
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by name or supplier..."
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               />
