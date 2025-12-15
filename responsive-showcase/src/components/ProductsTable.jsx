@@ -12,6 +12,9 @@ const ProductsTable = ({ products }) => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedCategoryFilter = useDebounce(categoryFilter, 500);
+  const debouncedSupplierFilter = useDebounce(supplierFilter, 500);
+  const debouncedOfferFilter = useDebounce(offerFilter, 500);
 
   const categories = useMemo(
     () => ["all", ...new Set(products.map((p) => p.category))],
@@ -33,17 +36,17 @@ const ProductsTable = ({ products }) => {
       );
     }
 
-    if (categoryFilter !== "all") {
-      result = result.filter((product) => product.category === categoryFilter);
+    if (debouncedCategoryFilter !== "all") {
+      result = result.filter((product) => product.category === debouncedCategoryFilter);
     }
 
-    if (supplierFilter !== "all") {
-      result = result.filter((product) => product.supplier === supplierFilter);
+    if (debouncedSupplierFilter !== "all") {
+      result = result.filter((product) => product.supplier === debouncedSupplierFilter);
     }
 
-    if (offerFilter === "withOffer") {
+    if (debouncedOfferFilter === "withOffer") {
       result = result.filter((product) => product.offer !== null);
-    } else if (offerFilter === "noOffer") {
+    } else if (debouncedOfferFilter === "noOffer") {
       result = result.filter((product) => product.offer === null);
     }
 
@@ -69,9 +72,9 @@ const ProductsTable = ({ products }) => {
   }, [
     products,
     debouncedSearchTerm,
-    categoryFilter,
-    supplierFilter,
-    offerFilter,
+    debouncedCategoryFilter,
+    debouncedOfferFilter,
+    debouncedSupplierFilter,
     sortConfig,
   ]);
 
