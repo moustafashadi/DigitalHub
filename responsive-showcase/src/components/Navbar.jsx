@@ -7,13 +7,17 @@ import {
   FiSettings,
   FiLogOut,
 } from "react-icons/fi";
-import { navigationTabs, userMenuItems } from "../mockData";
+import { userMenuItems, navigationTabs } from "../mockData";
+import { Link, useLocation } from "react-router-dom";
 
-const Navbar = ({ activeTab, onTabChange}) => {
+const Navbar = () => {
   // State management for UI interactions
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  
+  // Get current location for active tab highlighting
+  const location = useLocation();
 
   const userMenuButtonRef = useRef(null);
   const userMenuRef = useRef(null);
@@ -105,11 +109,15 @@ const Navbar = ({ activeTab, onTabChange}) => {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
   const toggleSearch = () => setIsSearchExpanded(!isSearchExpanded);
-
-  const handleTabClick = (tabLabel) => {
-    const normalizedTab = tabLabel.toLowerCase();
-    onTabChange(normalizedTab)
-    setIsMobileMenuOpen(false);
+  
+  /**
+   * Check if a path is active
+   * Handles both exact matches and home page special case
+   */
+  const isActiveTab = (path) => {
+    if (path === "/" && location.pathname === "/") return true;
+    if (path !== "/" && location.pathname === path) return true;
+    return false;
   };
 
   return (
@@ -118,42 +126,42 @@ const Navbar = ({ activeTab, onTabChange}) => {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="w-full px-6">
+        <div className="flex justify-between items-center h-16 gap-8">
           {/* Logo Section */}
           {/* DECISION: Flex-shrink-0 prevents logo from shrinking on small screens */}
-          <div className="flex-shrink-0 flex items-center">
-            <button
-              onClick={() => handleTabClick("home")}
+          <div className="flex-shrink-0">
+            <Link
+              to="/"
               className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-teal-500 bg-clip-text text-transparent"
               aria-label="DevShowCase home"
             >
               DevShowcase
-            </button>
+            </Link>
           </div>
 
           {/* Desktop Navigation Tabs */}
           {/* DECISION: Hidden on mobile (md:flex), saves space for mobile-first design */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1 flex-1">
             {navigationTabs.map((tab) => (
-              <button
+              <Link
                 key={tab.id}
-                onClick={() => handleTabClick(tab.label)}
+                to={tab.path}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  activeTab === tab.label.toLowerCase()
+                  isActiveTab(tab.path)
                     ? "bg-primary-50 text-primary-600"
                     : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                 }`}
                 role="menuitem"
-                aria-current={activeTab === tab.label.toLowerCase() ? "page" : undefined}
+                aria-current={isActiveTab(tab.path) ? "page" : undefined}
               >
                 {tab.label}
-              </button>
+              </Link>
             ))}
           </div>
 
           {/* Search Bar and User Menu */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 ml-auto">
             {/* Search Bar */}
             {/* DECISION: Conditional rendering based on screen size and state
              * Mobile: Icon that expands to full-width search
@@ -305,19 +313,20 @@ const Navbar = ({ activeTab, onTabChange}) => {
           >
             <div className="py-2 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
               {navigationTabs.map((tab) => (
-                <button
+                <Link
                   key={tab.id}
-                  onClick={() => handleTabClick(tab.label)}
-                  className={`w-full text-left px-4 py-3 text-base font-medium transition-colors ${
-                    activeTab === tab.label.toLowerCase()
+                  to={tab.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block w-full text-left px-4 py-3 text-base font-medium transition-colors ${
+                    isActiveTab(tab.path)
                       ? "bg-primary-50 text-primary-600 border-l-4 border-primary-600"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"
                   }`}
                   role="menuitem"
-                  aria-current={activeTab === tab.label.toLowerCase() ? "page" : undefined}
+                  aria-current={isActiveTab(tab.path) ? "page" : undefined}
                 >
                   {tab.label}
-                </button>
+                </Link>
               ))}
             </div>
           </div>

@@ -17,8 +17,6 @@
  * - Mobile: Horizontal layout (image | content)
  * - Tablet/Desktop: Vertical stacking within grid
  */
-
-import React from 'react';
 import { 
   FiCode, 
   FiLayout, 

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
+
+
 /**
  * error handling flow:
  * 1. when an image fails to load, onError fires
@@ -30,7 +32,7 @@ const ImageCarousel = ({ images, alt }) => {
 
             return () => clearInterval(interval); // Cleanup on unmount
         }
-    }, [currentIndex, isHovered, images.length]);
+    }, [currentIndex, isHovered, images.length, isFocused]);
 
     const handleKeyDown = (e) => {
         switch (e.key) {

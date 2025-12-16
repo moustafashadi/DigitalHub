@@ -1,5 +1,12 @@
 import { useMemo, useState } from "react";
-import { FiFilter, FiSearch, FiChevronUp, FiChevronDown, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import {
+  FiFilter,
+  FiSearch,
+  FiChevronUp,
+  FiChevronDown,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 import useDebounce from "../hooks/useDebounce";
 
 const ProductsTable = ({ products }) => {
@@ -31,17 +38,25 @@ const ProductsTable = ({ products }) => {
     if (debouncedSearchTerm) {
       result = result.filter(
         (product) =>
-          product.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-          product.supplier.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+          product.name
+            .toLowerCase()
+            .includes(debouncedSearchTerm.toLowerCase()) ||
+          product.supplier
+            .toLowerCase()
+            .includes(debouncedSearchTerm.toLowerCase())
       );
     }
 
     if (debouncedCategoryFilter !== "all") {
-      result = result.filter((product) => product.category === debouncedCategoryFilter);
+      result = result.filter(
+        (product) => product.category === debouncedCategoryFilter
+      );
     }
 
     if (debouncedSupplierFilter !== "all") {
-      result = result.filter((product) => product.supplier === debouncedSupplierFilter);
+      result = result.filter(
+        (product) => product.supplier === debouncedSupplierFilter
+      );
     }
 
     if (debouncedOfferFilter === "withOffer") {
