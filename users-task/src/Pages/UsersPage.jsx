@@ -3,9 +3,9 @@ import Title from "../components/Title";
 import SearchBar from "../components/SearchBar";
 import useUsers from "../hooks/useUsers";
 import UsersList from "../components/UsersList";
+import UserCard from "../components/UserCard";
 
 export default function UsersPage() {
-
   const { users: filteredUsers, search, setSearch, loading } = useUsers();
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -21,15 +21,12 @@ export default function UsersPage() {
 
       {loading && <p>Loading...</p>}
 
-      <UsersList filteredUsers={filteredUsers} setSelectedUser={setSelectedUser} />
+      <UsersList
+        filteredUsers={filteredUsers}
+        setSelectedUser={setSelectedUser}
+      />
 
-      {selectedUser && (
-        <div style={{ marginTop: 20 }}>
-          <h3>{selectedUser.name}</h3>
-          <p>{selectedUser.email}</p>
-          <p>{selectedUser.phone}</p>
-        </div>
-      )}
+      <UserCard selectedUser={selectedUser} />
     </div>
   );
 }
