@@ -14,12 +14,15 @@ function useUsers() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-        setLoading(false);
-      });
+    const users = setTimeout(() => {
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((res) => res.json())
+        .then((data) => {
+          setUsers(data);
+          setLoading(false);
+        });
+    }, 1000);
+    return () => clearTimeout(users);
   }, []);
 
   return { users: filteredUsers, search, setSearch, loading };
