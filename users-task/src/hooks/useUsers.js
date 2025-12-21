@@ -6,10 +6,9 @@ function useUsers() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const filteredUsers = useMemo (
-    () => users.filter((u) =>
-      u.name.toLowerCase().includes(search.toLowerCase())
-    ),
+  const filteredUsers = useMemo(
+    () =>
+      users.filter((u) => u.name.toLowerCase().includes(search.toLowerCase())),
     [users, search]
   );
 
