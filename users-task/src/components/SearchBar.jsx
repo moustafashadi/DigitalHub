@@ -1,11 +1,19 @@
 import React from "react";
+import { Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+
+const { Search } = Input;
 
 function SearchBar({ search, setSearch }) {
   return (
-    <input
-      placeholder="Search users"
+    <Search
+      placeholder="Search users by name..."
       value={search}
       onChange={(e) => setSearch(e.target.value)}
+      allowClear
+      prefix={<SearchOutlined />}
+      size="large"
+      style={{ maxWidth: 400 }}
     />
   );
 }

@@ -1,15 +1,21 @@
 import { useMemo } from "react";
 import { useEffect, useState } from "react";
+import useDebounce from "./useDebounce";
 
 function useUsers() {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Debounce the search term with 300ms delay
+  const debouncedSearch = useDebounce(search, 300);
+
   const filteredUsers = useMemo(
     () =>
-      users.filter((u) => u.name.toLowerCase().includes(search.toLowerCase())),
-    [users, search]
+      users.filter((u) =>
+        u.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+      ),
+    [users, debouncedSearch]
   );
 
   useEffect(() => {
