@@ -10,39 +10,26 @@ import {
 
 const { Title, Text } = Typography;
 
-function UserCard({ selectedUser }) {
+function UserCard({ selectedUser, isModal = false }) {
   if (!selectedUser) {
     return (
       <Card
-        style={{
-          borderRadius: 12,
-          textAlign: "center",
-          backgroundColor: "#fafafa",
-          border: "2px dashed #d9d9d9",
-        }}
+        className="rounded-xl text-center bg-gray-50"
+        style={{ border: "2px dashed #d9d9d9" }}
       >
-        <UserOutlined style={{ fontSize: 48, color: "#bfbfbf" }} />
-        <Title level={5} style={{ color: "#8c8c8c", marginTop: 16 }}>
+        <UserOutlined className="text-5xl text-gray-400" />
+        <Title level={5} className="text-gray-500 mt-4">
           Select a user to view details
         </Title>
       </Card>
     );
   }
 
-  return (
-    <Card
-      style={{
-        borderRadius: 12,
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-      }}
-    >
-      <div style={{ textAlign: "center", marginBottom: 16 }}>
-        <Avatar
-          size={80}
-          style={{ backgroundColor: "#1890ff" }}
-          icon={<UserOutlined />}
-        />
-        <Title level={3} style={{ marginTop: 12, marginBottom: 4 }}>
+  const content = (
+    <>
+      <div className="text-center mb-4">
+        <Avatar size={80} className="bg-primary" icon={<UserOutlined />} />
+        <Title level={3} className="mt-3 mb-1">
           {selectedUser.name}
         </Title>
         <Text type="secondary">@{selectedUser.username}</Text>
@@ -50,11 +37,11 @@ function UserCard({ selectedUser }) {
 
       <Divider />
 
-      <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <MailOutlined style={{ color: "#1890ff", fontSize: 18 }} />
+      <Space direction="vertical" size="middle" className="w-full">
+        <div className="flex items-center gap-3">
+          <MailOutlined className="text-primary text-lg" />
           <div>
-            <Text type="secondary" style={{ fontSize: 12 }}>
+            <Text type="secondary" className="text-xs">
               Email
             </Text>
             <br />
@@ -62,10 +49,10 @@ function UserCard({ selectedUser }) {
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <PhoneOutlined style={{ color: "#1890ff", fontSize: 18 }} />
+        <div className="flex items-center gap-3">
+          <PhoneOutlined className="text-primary text-lg" />
           <div>
-            <Text type="secondary" style={{ fontSize: 12 }}>
+            <Text type="secondary" className="text-xs">
               Phone
             </Text>
             <br />
@@ -74,10 +61,10 @@ function UserCard({ selectedUser }) {
         </div>
 
         {selectedUser.website && (
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <GlobalOutlined style={{ color: "#1890ff", fontSize: 18 }} />
+          <div className="flex items-center gap-3">
+            <GlobalOutlined className="text-primary text-lg" />
             <div>
-              <Text type="secondary" style={{ fontSize: 12 }}>
+              <Text type="secondary" className="text-xs">
                 Website
               </Text>
               <br />
@@ -87,10 +74,10 @@ function UserCard({ selectedUser }) {
         )}
 
         {selectedUser.address && (
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <HomeOutlined style={{ color: "#1890ff", fontSize: 18 }} />
+          <div className="flex items-center gap-3">
+            <HomeOutlined className="text-primary text-lg" />
             <div>
-              <Text type="secondary" style={{ fontSize: 12 }}>
+              <Text type="secondary" className="text-xs">
                 Address
               </Text>
               <br />
@@ -102,10 +89,10 @@ function UserCard({ selectedUser }) {
         )}
 
         {selectedUser.company && (
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <BankOutlined style={{ color: "#1890ff", fontSize: 18 }} />
+          <div className="flex items-center gap-3">
+            <BankOutlined className="text-primary text-lg" />
             <div>
-              <Text type="secondary" style={{ fontSize: 12 }}>
+              <Text type="secondary" className="text-xs">
                 Company
               </Text>
               <br />
@@ -114,8 +101,14 @@ function UserCard({ selectedUser }) {
           </div>
         )}
       </Space>
-    </Card>
+    </>
   );
+
+  if (isModal) {
+    return <div className="p-4">{content}</div>;
+  }
+
+  return <Card className="rounded-xl shadow-card-lg">{content}</Card>;
 }
 
 export default UserCard;

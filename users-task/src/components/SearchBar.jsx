@@ -13,7 +13,7 @@ function SearchBar({ search, setSearch }) {
       allowClear
       prefix={<SearchOutlined />}
       size="large"
-      style={{ maxWidth: 400 }}
+      className="w-full md:w-[300px] flex-shrink-0"
     />
   );
 }
