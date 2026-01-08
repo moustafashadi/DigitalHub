@@ -1,4 +1,4 @@
-import { Card, Avatar, Typography, Space, Divider } from "antd";
+import { Card, Avatar, Typography, Space, Divider, Button } from "antd";
 import {
   UserOutlined,
   MailOutlined,
@@ -6,11 +6,12 @@ import {
   GlobalOutlined,
   HomeOutlined,
   BankOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 
-function UserCard({ selectedUser, isModal = false }) {
+function UserCard({ selectedUser, isModal = false, onEdit }) {
   if (!selectedUser) {
     return (
       <Card
@@ -27,7 +28,18 @@ function UserCard({ selectedUser, isModal = false }) {
 
   const content = (
     <>
-      <div className="text-center mb-4">
+      <div className="text-center mb-4 relative">
+        {onEdit && (
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => onEdit(selectedUser)}
+            className="absolute right-0 top-0"
+            size="small"
+          >
+            Edit
+          </Button>
+        )}
         <Avatar size={80} className="bg-primary" icon={<UserOutlined />} />
         <Title level={3} className="mt-3 mb-1">
           {selectedUser.name}
