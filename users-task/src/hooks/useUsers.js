@@ -1,12 +1,27 @@
-import { useMemo, useCallback } from "react";
-import { useEffect, useState } from "react";
+import { useMemo, useCallback, useState } from "react";
+import useSWR from "swr";
 import useDebounce from "./useDebounce";
-import * as cacheService from "../services/userCacheService";
+
+// Fetcher function for SWR
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+// API URL
+const API_URL = "https://jsonplaceholder.typicode.com/users";
 
 function useUsers() {
-  const [users, setUsers] = useState([]);
+  // SWR handles caching, revalidation, and loading states
+  const {
+    data: users = [],
+    error,
+    isLoading,
+    mutate,
+  } = useSWR(API_URL, fetcher, {
+    revalidateOnFocus: false, // Don't refetch when window regains focus
+    revalidateOnReconnect: false, // Don't refetch on reconnect
+    dedupingInterval: 60000, // Dedupe requests within 1 minute
+  });
+
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
 
   // Debounce the search term with 300ms delay
   const debouncedSearch = useDebounce(search, 300);
@@ -14,82 +29,49 @@ function useUsers() {
   const filteredUsers = useMemo(
     () =>
       users.filter((u) =>
-        u.name.toLowerCase().includes(debouncedSearch.toLowerCase())
+        u.name.toLowerCase().includes(debouncedSearch.toLowerCase()),
       ),
-    [users, debouncedSearch]
+    [users, debouncedSearch],
   );
 
-  // Fetch users from API
-  const fetchFromAPI = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/users"
+  // Update a user (optimistic update)
+  const updateUser = useCallback(
+    (id, userData) => {
+      mutate(
+        (currentUsers) =>
+          currentUsers.map((user) =>
+            user.id === id ? { ...user, ...userData } : user,
+          ),
+        { revalidate: false }, // Don't refetch from API after local update
       );
-      const data = await response.json();
-      setUsers(data);
-      cacheService.setUsers(data);
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+    },
+    [mutate],
+  );
 
-  // Load users - from cache if available, otherwise from API
-  useEffect(() => {
-    if (cacheService.hasValidCache()) {
-      // Load from cache (instant)
-      const cachedUsers = cacheService.getUsers();
-      setUsers(cachedUsers);
-    } else {
-      // Fetch from API and cache
-      fetchFromAPI();
-    }
-  }, [fetchFromAPI]);
+  // Delete a user (optimistic update)
+  const deleteUser = useCallback(
+    (id) => {
+      mutate((currentUsers) => currentUsers.filter((user) => user.id !== id), {
+        revalidate: false,
+      });
+    },
+    [mutate],
+  );
 
-  // Update a user (both in state and cache)
-  const updateUser = useCallback((id, userData) => {
-    setUsers((prevUsers) => {
-      const updatedUsers = prevUsers.map((user) =>
-        user.id === id ? { ...user, ...userData } : user
-      );
-      cacheService.setUsers(updatedUsers);
-      return updatedUsers;
-    });
-  }, []);
-
-  // Delete a user (both from state and cache)
-  const deleteUser = useCallback((id) => {
-    setUsers((prevUsers) => {
-      const filteredUsers = prevUsers.filter((user) => user.id !== id);
-      cacheService.setUsers(filteredUsers);
-      return filteredUsers;
-    });
-  }, []);
-
-  // Force refresh from API (clears cache and re-fetches)
+  // Force refresh from API
   const refreshFromAPI = useCallback(() => {
-    cacheService.clearCache();
-    fetchFromAPI();
-  }, [fetchFromAPI]);
-
-  // Clear cache
-  const clearCache = useCallback(() => {
-    cacheService.clearCache();
-    setUsers([]);
-  }, []);
+    mutate(); // Triggers a revalidation from the API
+  }, [mutate]);
 
   return {
     users: filteredUsers,
-    allUsers: users,
     search,
     setSearch,
-    loading,
+    loading: isLoading,
+    error,
     updateUser,
     deleteUser,
     refreshFromAPI,
-    clearCache,
   };
 }
 

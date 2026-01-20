@@ -19,6 +19,7 @@ import UsersList from "../components/UsersList";
 import UserCard from "../components/UserCard";
 import UserCardModal from "../components/UserCardModal";
 import EditUserModal from "../components/EditUserModal";
+import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
 
@@ -55,6 +56,8 @@ export default function UsersPage() {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <ConfigProvider
       theme={{
@@ -74,6 +77,7 @@ export default function UsersPage() {
                 <Tooltip title="Data is cached in localStorage">
                   <DatabaseOutlined className="text-green-500" />
                 </Tooltip>
+                <Button onClick={() => navigate("/about")}>About</Button>
               </div>
               <div className="flex items-center gap-3">
                 <SearchBar search={search} setSearch={setSearch} />
