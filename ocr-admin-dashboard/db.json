@@ -1,0 +1,444 @@
+{
+  "requests": [
+    {
+      "id": "OCR-001",
+      "name": "John Smith Passport",
+      "status": "rejected",
+      "submittedAt": "2024-01-15T10:30:00Z",
+      "submittedBy": "user123",
+      "documentType": "passport",
+      "extractedData": {
+        "fullName": "John Michael Smith",
+        "dateOfBirth": "1985-03-22",
+        "documentNumber": "AB1234567",
+        "expiryDate": "2028-03-21",
+        "nationality": "United States"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-15T10:30:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "rejected",
+          "timestamp": "2026-01-27T09:25:15.705Z",
+          "changedBy": "admin",
+          "note": "test rejection"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2026-01-27T11:59:34.899Z",
+          "changedBy": "admin",
+          "note": "Status changed to processing"
+        },
+        {
+          "status": "rejected",
+          "timestamp": "2026-01-27T12:03:03.723Z",
+          "changedBy": "admin",
+          "note": "Status changed to rejected"
+        }
+      ]
+    },
+    {
+      "id": "OCR-002",
+      "name": "Jane Doe ID Card",
+      "status": "approved",
+      "submittedAt": "2024-01-14T14:20:00Z",
+      "submittedBy": "user456",
+      "documentType": "id_card",
+      "extractedData": {
+        "fullName": "Jane Elizabeth Doe",
+        "dateOfBirth": "1990-07-15",
+        "documentNumber": "ID9876543",
+        "expiryDate": "2025-07-14",
+        "address": "123 Main Street, Springfield"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-14T14:20:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2024-01-14T14:25:00Z",
+          "changedBy": "system",
+          "note": "OCR processing started"
+        },
+        {
+          "status": "approved",
+          "timestamp": "2024-01-14T15:00:00Z",
+          "changedBy": "admin",
+          "note": "Document verified successfully"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2026-01-27T09:26:31.279Z",
+          "changedBy": "admin",
+          "note": "test reprocess"
+        },
+        {
+          "status": "approved",
+          "timestamp": "2026-01-27T12:06:51.773Z",
+          "changedBy": "admin",
+          "note": "Status changed to approved"
+        }
+      ]
+    },
+    {
+      "id": "OCR-003",
+      "name": "Bob Wilson Driver License",
+      "status": "processing",
+      "submittedAt": "2024-01-13T09:15:00Z",
+      "submittedBy": "user789",
+      "documentType": "driver_license",
+      "extractedData": {
+        "fullName": "Robert James Wilson",
+        "dateOfBirth": "1978-11-30",
+        "documentNumber": "DL555666",
+        "expiryDate": "2023-11-29"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-13T09:15:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2024-01-13T09:20:00Z",
+          "changedBy": "system",
+          "note": "OCR processing started"
+        },
+        {
+          "status": "rejected",
+          "timestamp": "2024-01-13T10:00:00Z",
+          "changedBy": "admin",
+          "note": "Document expired"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2026-01-27T12:02:50.272Z",
+          "changedBy": "admin",
+          "note": "Status changed to processing"
+        }
+      ]
+    },
+    {
+      "id": "OCR-004",
+      "name": "Alice Brown Passport",
+      "status": "approved",
+      "submittedAt": "2024-01-15T11:45:00Z",
+      "submittedBy": "user101",
+      "documentType": "passport",
+      "extractedData": null,
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-15T11:45:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2024-01-15T11:50:00Z",
+          "changedBy": "system",
+          "note": "OCR processing started"
+        },
+        {
+          "status": "approved",
+          "timestamp": "2026-01-27T11:57:16.359Z",
+          "changedBy": "admin",
+          "note": "test"
+        }
+      ]
+    },
+    {
+      "id": "OCR-005",
+      "name": "Charlie Davis Invoice",
+      "status": "pending",
+      "submittedAt": "2024-01-15T08:00:00Z",
+      "submittedBy": "user202",
+      "documentType": "invoice",
+      "extractedData": {
+        "companyName": "ABC Corp",
+        "invoiceNumber": "INV-2024-001",
+        "totalAmount": "$1,250.00",
+        "dueDate": "2024-02-15"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-15T08:00:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        }
+      ]
+    },
+    {
+      "id": "OCR-006",
+      "name": "Diana Evans Contract",
+      "status": "approved",
+      "submittedAt": "2024-01-12T16:30:00Z",
+      "submittedBy": "user303",
+      "documentType": "contract",
+      "extractedData": {
+        "partyA": "XYZ Holdings",
+        "partyB": "Diana Evans",
+        "contractDate": "2024-01-10",
+        "contractValue": "$50,000"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-12T16:30:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "approved",
+          "timestamp": "2024-01-12T17:00:00Z",
+          "changedBy": "admin",
+          "note": "Contract verified"
+        }
+      ]
+    },
+    {
+      "id": "OCR-007",
+      "name": "Frank Miller ID Card",
+      "status": "pending",
+      "submittedAt": "2024-01-15T13:20:00Z",
+      "submittedBy": "user404",
+      "documentType": "id_card",
+      "extractedData": {
+        "fullName": "Frank Thomas Miller",
+        "dateOfBirth": "1995-05-18",
+        "documentNumber": "ID1122334",
+        "address": "456 Oak Avenue, Rivertown"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-15T13:20:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        }
+      ]
+    },
+    {
+      "id": "OCR-008",
+      "name": "Grace Lee Receipt",
+      "status": "approved",
+      "submittedAt": "2024-01-11T10:00:00Z",
+      "submittedBy": "user505",
+      "documentType": "receipt",
+      "extractedData": {
+        "merchant": "Tech Store Inc",
+        "transactionDate": "2024-01-10",
+        "totalAmount": "$899.99",
+        "paymentMethod": "Credit Card"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-11T10:00:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "approved",
+          "timestamp": "2024-01-11T10:30:00Z",
+          "changedBy": "admin",
+          "note": "Receipt processed"
+        }
+      ]
+    },
+    {
+      "id": "OCR-009",
+      "name": "Henry Clark Passport",
+      "status": "rejected",
+      "submittedAt": "2024-01-10T15:45:00Z",
+      "submittedBy": "user606",
+      "documentType": "passport",
+      "extractedData": {
+        "fullName": "Henry William Clark",
+        "dateOfBirth": "1982-09-05"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-10T15:45:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "rejected",
+          "timestamp": "2024-01-10T16:00:00Z",
+          "changedBy": "admin",
+          "note": "Image quality too low"
+        }
+      ]
+    },
+    {
+      "id": "OCR-010",
+      "name": "Ivy Robinson Bank Statement",
+      "status": "processing",
+      "submittedAt": "2024-01-15T12:00:00Z",
+      "submittedBy": "user707",
+      "documentType": "bank_statement",
+      "extractedData": null,
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-15T12:00:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2024-01-15T12:05:00Z",
+          "changedBy": "system",
+          "note": "OCR processing started"
+        }
+      ]
+    },
+    {
+      "id": "OCR-011",
+      "name": "Jack Turner Utility Bill",
+      "status": "approved",
+      "submittedAt": "2024-01-09T09:30:00Z",
+      "submittedBy": "user808",
+      "documentType": "utility_bill",
+      "extractedData": {
+        "provider": "City Power Co",
+        "accountNumber": "ACC-789456",
+        "billingPeriod": "Dec 2023",
+        "amountDue": "$145.67"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-09T09:30:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "approved",
+          "timestamp": "2024-01-09T10:00:00Z",
+          "changedBy": "admin",
+          "note": "Bill verified"
+        }
+      ]
+    },
+    {
+      "id": "OCR-012",
+      "name": "Karen White Driver License",
+      "status": "pending",
+      "submittedAt": "2024-01-15T14:00:00Z",
+      "submittedBy": "user909",
+      "documentType": "driver_license",
+      "extractedData": {
+        "fullName": "Karen Michelle White",
+        "dateOfBirth": "1988-12-03",
+        "documentNumber": "DL999888",
+        "expiryDate": "2026-12-02"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-15T14:00:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        }
+      ]
+    },
+    {
+      "id": "OCR-013",
+      "name": "Leo Martinez Tax Form",
+      "status": "processing",
+      "submittedAt": "2024-01-15T09:00:00Z",
+      "submittedBy": "user010",
+      "documentType": "tax_form",
+      "extractedData": null,
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-15T09:00:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2024-01-15T09:10:00Z",
+          "changedBy": "system",
+          "note": "OCR processing started"
+        }
+      ]
+    },
+    {
+      "id": "OCR-014",
+      "name": "Mary Johnson Passport",
+      "status": "approved",
+      "submittedAt": "2024-01-08T11:00:00Z",
+      "submittedBy": "user011",
+      "documentType": "passport",
+      "extractedData": {
+        "fullName": "Mary Anne Johnson",
+        "dateOfBirth": "1975-04-28",
+        "documentNumber": "PA7654321",
+        "expiryDate": "2029-04-27",
+        "nationality": "Canada"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-08T11:00:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "processing",
+          "timestamp": "2024-01-08T11:05:00Z",
+          "changedBy": "system",
+          "note": "OCR processing started"
+        },
+        {
+          "status": "approved",
+          "timestamp": "2024-01-08T11:30:00Z",
+          "changedBy": "admin",
+          "note": "Passport verified"
+        }
+      ]
+    },
+    {
+      "id": "OCR-015",
+      "name": "Nathan King Insurance Card",
+      "status": "rejected",
+      "submittedAt": "2024-01-07T14:30:00Z",
+      "submittedBy": "user012",
+      "documentType": "insurance_card",
+      "extractedData": {
+        "policyNumber": "POL-123456",
+        "holderName": "Nathan King"
+      },
+      "statusHistory": [
+        {
+          "status": "pending",
+          "timestamp": "2024-01-07T14:30:00Z",
+          "changedBy": "system",
+          "note": "Request submitted"
+        },
+        {
+          "status": "rejected",
+          "timestamp": "2024-01-07T15:00:00Z",
+          "changedBy": "admin",
+          "note": "Incomplete data extracted"
+        }
+      ]
+    }
+  ]
+}
