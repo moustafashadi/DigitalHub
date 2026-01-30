@@ -1,15 +1,15 @@
-import type { ChangeEvent } from "react";
-import { useOCRRequests } from "../../hooks/useOCRRequests";
-import type { OCRRequest, OCRRequestsState } from "../../types";
+import type { OCRRequest } from "../../types";
 
 // select + label
 
-function StatusFilter( statusFilter: OCRRequest["status"] ) {
-  const { setStatusFilter } = useOCRRequests();
+function StatusFilter({
+  value,
+  onChange,
+}: {
+  value: OCRRequest["status"] | "all";
+  onChange: (value: OCRRequest["status"] | "all") => void;
+}) {
 
-  const handleStatusChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setStatusFilter(e.target.value);
-  };
 
   return (
     <div>
@@ -20,8 +20,8 @@ function StatusFilter( statusFilter: OCRRequest["status"] ) {
         Status
       </label>
       <select
-        value={statusFilter}
-        onChange={handleStatusChange}
+        value={value}
+        onChange={(e) => onChange(e.target.value as OCRRequest["status"])}
         className="px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="all">All Status</option>

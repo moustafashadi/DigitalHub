@@ -20,7 +20,7 @@ export function useOCRRequests() {
     dedupingInterval: 60000, // 1 minute
   });
 
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState<OCRRequest["status"] | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5;
@@ -82,14 +82,12 @@ export function useOCRRequests() {
     loading: isLoading,
     error: error?.message || null,
     statusFilter,
-    setStatusFilter: (filter: string) => {
+    setStatusFilter: (filter: OCRRequest["status"] | "all") => {
       setStatusFilter(filter);
-      setCurrentPage(1);
     },
     searchQuery,
     setSearchQuery: (query: string) => {
       setSearchQuery(query);
-      setCurrentPage(1);
     },
     currentPage,
     setCurrentPage: (page: number) => setCurrentPage(page),

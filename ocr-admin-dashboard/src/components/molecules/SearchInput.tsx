@@ -1,28 +1,16 @@
-import useDebounce from "../../hooks/useDebounce";
-
-// Input + Icon
-
 interface SearchInputProps {
-    value: string;
-    onChange: (value: string) => void;
-    placeholder?: string;
-    debounceDelay?: number;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
 }
 
 export default function SearchInput({
-    value,
-    onChange,
-    placeholder,
-    debounceDelay
+  value,
+  onChange,
+  placeholder,
 }: SearchInputProps) {
-    const debouncedValue = useDebounce(value, debounceDelay);
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(event.target.value);
-    };
-
-    return (
-        <div className="relative">
+  return (
+    <div className="relative">
       {/* search icon */}
       <svg
         className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
@@ -39,11 +27,11 @@ export default function SearchInput({
       </svg>
       <input
         type="text"
-        value={debouncedValue}
-        onChange={handleChange}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
     </div>
-    )
+  );
 }
