@@ -133,7 +133,7 @@ export function useOCRRequest(id: string | undefined) {
 
       await axios.put(`${API_URL}/${id}`, updated);
       mutate(updated); //update the local cache
-      globalMutate(API_URL, { revalidate: true }); //refetch the whole list
+      await globalMutate(API_URL, undefined, { revalidate: true }); // Force refetch the list
     },
     [request, id, globalMutate, mutate],
   );
