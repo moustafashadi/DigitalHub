@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useOCRRequest } from "../../hooks/useOCRRequests";
 import { Badge, Button } from "../atoms";
-import { Header, Modal } from "../organisms";
+import { Modal } from "../organisms";
+import { useNavigate } from "react-router-dom";
 import type { OCRRequest } from "../../types";
 
 type ActionType = "approve" | "reject" | "reprocess" | null;
 
 export default function RequestDetailPage() {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
 
   const { request, loading, error, updateStatus } = useOCRRequest(id);
@@ -73,7 +75,16 @@ export default function RequestDetailPage() {
 
   return (
     <>
-      <Header />
+      <div className="flex items-center gap-4 mb-6">
+        <button
+          onClick={() => navigate("/requests")}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          &larr; Back to list
+        </button>
+        <h2 className="text-2xl font-bold">{request.name}</h2>
+        <Badge status={request.status} />
+      </div>
 
         {/* extracted data */}
         <div className="bg-white rounded-lg shadow p-6">
