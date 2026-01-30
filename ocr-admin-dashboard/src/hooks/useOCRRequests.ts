@@ -3,7 +3,7 @@ import useSWR, { useSWRConfig } from "swr";
 import axios from "axios";
 import type { OCRRequest, StatusHistoryEntry } from "../types";
 
-const API_URL = "http://localhost:3001/requests";
+const API_URL = `${import.meta.env.VITE_API_URL}/requests`;
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -20,7 +20,9 @@ export function useOCRRequests() {
     dedupingInterval: 60000, // 1 minute
   });
 
-  const [statusFilter, setStatusFilter] = useState<OCRRequest["status"] | "all">("all");
+  const [statusFilter, setStatusFilter] = useState<
+    OCRRequest["status"] | "all"
+  >("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 5;
@@ -133,8 +135,8 @@ export function useOCRRequest(id: string | undefined) {
       mutate(updated); //update the local cache
       globalMutate(API_URL, { revalidate: true }); //refetch the whole list
     },
-    [request, id, globalMutate, mutate]
-  )
+    [request, id, globalMutate, mutate],
+  );
 
   return {
     request,
@@ -142,5 +144,5 @@ export function useOCRRequest(id: string | undefined) {
     error: error?.message || null,
     updateStatus,
     refresh: mutate,
-  }
+  };
 }
